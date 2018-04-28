@@ -11,7 +11,7 @@ class Solution(object):
                 l = i-1
                 break
 
-        for i in range(i+1, n):
+        for i in range(i, n):
             while l>0 and nums[i]<nums[l-1]:
                 l-=1
 
@@ -21,7 +21,7 @@ class Solution(object):
                 r = i+1
                 break
 
-        for i in range(i-1, -1, -1):
+        for i in range(i, -1, -1):
             while r<n-1 and nums[i]>nums[r+1]:
                 r+=1
 
