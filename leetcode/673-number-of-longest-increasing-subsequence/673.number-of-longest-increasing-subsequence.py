@@ -5,17 +5,18 @@ class Solution(object):
         :rtype: int
         """
         n = len(nums)
+        if n==0: return 0
         dp = [1]*n
-        longestNum = 1
+        dpNum = [1]*n
         longest = 1
         for i in range(1, n):
             for j in range(i):
                 if nums[i]>nums[j]:
-                    dp[i] = max(dp[i], dp[j]+1)
-            if dp[i]>longest:
-                longest = dp[i]
-                longestNum = 1
-            elif dp[i]==longest:
-                longestNum+=1
+                    if dp[i]<dp[j]+1:
+                        dp[i]=dp[j]+1
+                        dpNum[i]=dpNum[j]
+                    elif dp[i]==dp[j]+1:
+                        dpNum[i]+=dpNum[j]
+            longest = max(longest, dp[i])
 
-        return longestNum
+        return sum(dpNum[i] for i, l in enumerate(dp) if l==longest)
